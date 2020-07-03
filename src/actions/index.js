@@ -10,14 +10,12 @@ export function incrementAsync() {
   return async (dispatch) => {
     await fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
-      .then((json) => console.log(json));
-    dispatch({
-      type: "GET_DATA",
-    });
-
-    setTimeout(() => {
-      dispatch(_add());
-    }, 5000);
+      .then((json) => {
+        setTimeout(() => {
+          dispatch({ type: "GET_DATA", value: json });
+          dispatch(_add());
+        }, 5000);
+      });
   };
 }
 

@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function App() {
+import { incrementAsync, decrementAsync } from "./actions";
+import "./App.css";
+
+function TodoList() {
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter);
+
+  const _add = () => {
+    dispatch(incrementAsync());
+    console.log(useSelector);
+  };
+
+  const _substract = () => {
+    dispatch(decrementAsync());
+  };
+
+  const state = useSelector((state) => state);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App App-header">
+      <div>Counter: {counter}</div>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <button className="button button1" onClick={_substract}>
+          Substract
+        </button>
+        <button className="button button2" onClick={_add}>
+          Add
+        </button>
+      </div>
+      <div>
+        <h4>{state.counter}</h4>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default TodoList;
